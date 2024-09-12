@@ -1,0 +1,179 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Taylor Series: Applications in Biology}
+\author{Daniel Ortiz-Barrientos}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Taylor series are a fundamental concept in mathematics with wide-ranging applications, including in the biological sciences. This document explores Taylor series, their mathematical foundation, and their relevance to biology. We will start with a general definition, then explore specific cases, discuss convergence, truncation, and multivariable extensions, and then focus on various biological applications.
+
+\section{Definition}
+A Taylor series represents a function as an infinite sum of terms calculated from the function's derivatives at a single point. For a function \(f(x)\) that is infinitely differentiable at a point \(a\), the Taylor series is:
+\[
+f(x) = f(a) + f'(a)(x-a) + \frac{f''(a)(x-a)^2}{2!} + \frac{f'''(a)(x-a)^3}{3!} + \cdots
+\]
+Or more concisely:
+\[
+f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)(x-a)^n}{n!}
+\]
+where \(f^{(n)}(a)\) is the \(n\)th derivative of \(f\) evaluated at \(a\). The factorial \(n!\) (n factorial) is the product of all positive integers up to \(n\). This series allows us to express complex functions as sums of simpler polynomial terms.
+
+To understand the definition of the Taylor series, we need to delve into several key concepts and their relationships.
+
+\subsection{Function and Derivatives}
+A function \( f(x) \) maps each element \( x \) from its domain to a unique value \( f(x) \) in its range. Derivatives measure how a function changes as its input changes. The first derivative \( f'(x) \) gives the slope of the tangent line to the function at a point, indicating the rate of change. Higher-order derivatives, like \( f''(x) \), \( f'''(x) \), etc., provide information about the function's curvature, concavity, and more intricate behaviours.
+
+\subsection{Taylor Series}
+A Taylor series approximates a function by using its derivatives at a specific point \( a \). It expresses \( f(x) \) as an infinite sum of polynomial terms derived from these derivatives. This is valuable because polynomial functions are simpler to work with, and the series can provide accurate approximations for complex functions within a certain range around \( a \).
+
+\subsection{Series Expansion}
+The general form of the Taylor series expansion of a function \( f(x) \) about a point \( a \) is:
+\[
+f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)(x-a)^n}{n!}
+\]
+Here:
+\begin{itemize}
+    \item \( f^{(n)}(a) \) is the \( n \)th derivative of \( f \) evaluated at \( a \).
+    \item \( (x-a)^n \) represents the term's dependence on the distance from \( x \) to \( a \).
+    \item \( n! \) (n factorial) normalizes the terms, ensuring correct weighting.
+\end{itemize}
+
+\subsection{Terms Breakdown}
+\begin{itemize}
+    \item \textbf{Zeroth Term:} \( f(a) \) — the function's value at \( a \).
+    \item \textbf{First Term:} \( f'(a)(x-a) \) — linear term based on the slope at \( a \).
+    \item \textbf{Second Term:} \( \frac{f''(a)(x-a)^2}{2!} \) — quadratic term accounting for curvature.
+    \item \textbf{Higher-Order Terms:} \( \frac{f^{(n)}(a)(x-a)^n}{n!} \) — include more complex behaviours.
+\end{itemize}
+
+\subsection{Practical Use}
+The Taylor series is useful for approximating functions that are difficult to evaluate directly. By truncating the series to a finite number of terms, one can obtain a polynomial approximation that is often sufficiently accurate within a small interval around \( a \).
+
+\subsection{Example}
+Consider \( f(x) = e^x \):
+\begin{itemize}
+    \item At \( a = 0 \), all derivatives \( f^{(n)}(0) = e^0 = 1 \).
+    \item The Taylor series becomes \( e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} \).
+\end{itemize}
+
+\section{Maclaurin Series}
+A special case of the Taylor series where $a = 0$ is called a Maclaurin series. It simplifies the expansion as we evaluate the derivatives at zero:
+\begin{equation}
+f(x) = f(0) + f'(0)x + \frac{f''(0)x^2}{2!} + \frac{f'''(0)x^3}{3!} + \cdots
+\end{equation}
+For example, the exponential function $e^x$ can be expressed as:
+\begin{equation}
+e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots
+\end{equation}
+Maclaurin series are particularly useful when modeling biological processes around an equilibrium point, often taken as zero.
+
+\section{Convergence}
+The series converges to the function \( f(x) \) if the remainder term (the error between the actual function and the series approximation) approaches zero as more terms are added. This convergence depends on the function and the point \( a \).
+
+Taylor series do not always converge to the function for all $x$. The series converges to $f(x)$ within some interval around $a$, called the radius of convergence. To determine this radius, we often use the ratio test:
+\begin{equation}
+\lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = L
+\end{equation}
+If $L < 1$, the series converges. If $L > 1$, the series diverges. If $L = 1$, the test is inconclusive. This concept is crucial in biological modeling to ensure the series used provides a valid approximation within the range of interest.
+
+\section{Truncation}
+In practice, we often use truncated Taylor series (polynomials) to approximate functions. Truncating a Taylor series involves cutting off the series after a finite number of terms. The more terms we include, the better the approximation:
+\begin{equation}
+P_n(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)(x-a)^k}{k!}
+\end{equation}
+Here, $P_n(x)$ represents the $n$th degree Taylor polynomial. Truncation is particularly useful in numerical simulations where infinite series cannot be computed, such as modeling enzyme kinetics or population dynamics.
+
+\section{Multivariable Taylor Series}
+For functions of multiple variables, we can extend the concept of Taylor series. For a function $f(x,y)$ around point $(a,b)$:
+\begin{align}
+f(x,y) &= f(a,b) + \left[\frac{\partial f}{\partial x}(a,b)(x-a) + \frac{\partial f}{\partial y}(a,b)(y-b)\right] \nonumber \\
+&\quad + \left[\frac{\partial^2 f}{\partial x^2}(a,b)\frac{(x-a)^2}{2!} + 2\frac{\partial^2 f}{\partial x \partial y}(a,b)(x-a)(y-b) + \frac{\partial^2 f}{\partial y^2}(a,b)\frac{(y-b)^2}{2!}\right] + \cdots
+\end{align}
+Here, $\frac{\partial f}{\partial x}$ and $\frac{\partial f}{\partial y}$ represent the partial derivatives of $f$ with respect to $x$ and $y$, respectively. This is useful in biological contexts where systems often depend on multiple variables, such as gene expression influenced by both genetic and environmental factors.
+
+\section{Applications in Biology}
+\subsection{Function Approximation}
+Taylor series allow us to approximate complex biological functions with polynomials. This is useful for modeling growth rates, enzyme kinetics, and other biological processes. For example, the growth rate of a population $N(t)$ might be approximated near a time $t_0$ using a Taylor series:
+\begin{equation}
+N(t) \approx N(t_0) + N'(t_0)(t-t_0) + \frac{N''(t_0)(t-t_0)^2}{2!}
+\end{equation}
+
+\subsection{Numerical Methods}
+Many numerical methods for solving differential equations, which model population dynamics or gene expression patterns, use Taylor series approximations. For instance, the Euler method for solving ordinary differential equations relies on a first-order Taylor expansion:
+\begin{equation}
+y_{n+1} = y_n + h f(t_n, y_n)
+\end{equation}
+where $h$ is the step size. Higher-order methods, like the Runge-Kutta methods, use more terms from the Taylor series to improve accuracy.
+
+\subsection{Error Analysis}
+The remainder term in a Taylor series can be used to bound the error when approximating a function. Understanding the error is crucial when making predictions in biological models. The remainder term, often denoted $R_n(x)$, gives us a measure of how accurate our truncated series is:
+\begin{equation}
+R_n(x) = \frac{f^{(n+1)}(c)(x-a)^{n+1}}{(n+1)!}
+\end{equation}
+where $c$ is some point between $a$ and $x$.
+
+\subsection{Physical and Chemical Laws}
+Many laws in biology, such as Michaelis-Menten kinetics and diffusion processes, can be expressed as Taylor series. This helps in simplifying and understanding these laws. For example, the reaction rate $v$ in Michaelis-Menten kinetics can be expanded as a series to analyze its behavior under different substrate concentrations $[S]$:
+\begin{equation}
+v = \frac{V_{\max}[S]}{K_m + [S]}
+\end{equation}
+This can be approximated near $[S] = 0$ using a Taylor expansion.
+
+\subsection{Stability Analysis in Population Models}
+The first-order terms of a Taylor series are used to linearize nonlinear population models around equilibrium points, crucial for analyzing local behavior and stability properties. This linearization simplifies the study of the system's dynamics near equilibrium, making it easier to determine stability:
+\begin{equation}
+\frac{dN}{dt} = rN\left(1 - \frac{N}{K}\right)
+\end{equation}
+Linearizing this around the equilibrium $N = K$ helps to understand how the population behaves near this point.
+
+\section{Examples}
+\subsection{Exponential Growth}
+The exponential growth model in populations can be approximated using its Taylor series:
+\begin{equation}
+e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots
+\end{equation}
+This is particularly relevant for modeling early stages of population growth where resources are abundant.
+
+\subsection{Sinusoidal Patterns in Biological Rhythms}
+Biological rhythms, such as circadian cycles, can be modeled using the sine function:
+\begin{equation}
+\sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots
+\end{equation}
+These patterns are crucial for understanding periodic behaviors in biology.
+
+\subsection{Logarithmic Growth Phases}
+Logarithmic growth phases in cell cultures can be expressed as:
+\begin{equation}
+\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots \quad \text{for } |x| < 1
+\end{equation}
+This expansion is useful for modeling scenarios where growth rates slow as resources become limited.
+
+\section{Error and Remainder}
+When we truncate a Taylor series, we introduce error. The remainder term, $R_n(x)$, represents this error:
+\begin{equation}
+f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)(x-a)^k}{k!} + R_n(x)
+\end{equation}
+There are various forms to express this remainder, such as Lagrange's form or Cauchy's form. For example, Lagrange's form of the remainder is:
+\begin{equation}
+R_n(x) = \frac{f^{(n+1)}(c)(x-a)^{n+1}}{(n+1)!}
+\end{equation}
+where $c$ is some point between $a$ and $x$. This term helps in quantifying the accuracy of the approximation.
+
+\section{Taylor's Theorem}
+Taylor's Theorem provides a formal justification for using Taylor series to approximate functions. It states that if $f$ is $(n+1)$ times differentiable at $a$, then
+\begin{equation}
+f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)(x-a)^k}{k!} + R_n(x)
+\end{equation}
+where $R_n(x)$ is the remainder term. This theorem is crucial for understanding the accuracy and limitations of Taylor series approximations.
+
+\section{Conclusion}
+In the context of biological systems and stability analysis, Taylor series allow us to approximate nonlinear functions with linear ones near points of interest (like equilibria). This linearization is crucial for analyzing local behavior and stability properties of complex biological systems.
+
+\end{document}

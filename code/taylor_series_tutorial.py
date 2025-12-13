@@ -4,7 +4,7 @@
 TAYLOR SERIES: A VISUAL INTUITION FOR BIOLOGISTS
 ================================================================================
 
-Author: Daniel Ortiz-Barrientos (with Claude)
+Author: Daniel Ortiz-Barrientos (with Claude as copilot)
 Purpose: Build deep intuition for Taylor series through visualization
 
 THE CORE IDEA
